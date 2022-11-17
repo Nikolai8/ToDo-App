@@ -11,11 +11,22 @@ function App() {
         </div>
 
         <div className="App-ListContainer">
-          <p>ToDo-Liste</p>
+          <p>Meine Aufgaben</p>
           
-          <div className="App-ListItemContainer"><p>Eintrag 1</p></div>
-          <div><p>Eintrag 2</p></div>
-          <div><p>Eintrag 3</p></div>
+          <div className="App-ListItemContainer">
+            <div className="App-ListItemText">Eintrag 1</div>
+          </div>
+          <div className="App-ListItemContainer">
+            <div className="App-ListItemText">Eintrag 2</div>
+          </div>
+          <div className="App-ListItemContainer">
+            <div className="App-ListItemText">Eintrag 3</div>
+          </div>
+          
+        </div>
+
+        <div className="App-ListAddItemContainer">
+          Hinzufügen
         </div>
       </main>
     </div>
