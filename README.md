@@ -1,3 +1,3 @@
 # ToDo-App description
-## Frontend: React
-## Backend: Spring Boot
+## React Frontend
+## Spring Boot Backend
