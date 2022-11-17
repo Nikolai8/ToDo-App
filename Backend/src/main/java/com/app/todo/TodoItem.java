@@ -10,6 +10,7 @@ import javax.persistence.Id;
 public class TodoItem implements Serializable {
 
     @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String todo;
     
     private int priority = 2;
@@ -73,4 +74,3 @@ public class TodoItem implements Serializable {
     }
     
 }
-
