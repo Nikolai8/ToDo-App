@@ -31,7 +31,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 //CRUD Controller class
 //Create Read Update Delete
-
+/*
 @RestController
 @Controller
 @RequestMapping("/todos")
@@ -55,8 +55,8 @@ public class ApiController {
     public @ResponseBody List<TodoItem> getTodoItems() {
         // This returns a JSON or XML with the users
         return items;
-    }
-    /*
+    }*/
+    
 @RestController
 @Controller
 @RequestMapping("/todos")
@@ -64,7 +64,7 @@ public class ApiController {
 
     // internal list of todo items
     @Autowired
-    private TodoItem items;
+    private TodoRepositiory todoRepo;
 
     @PostMapping(path="/add") // Map ONLY POST Requests
     public @ResponseBody String createAndAddTodoItem (@RequestParam String name) {
@@ -73,16 +73,16 @@ public class ApiController {
 
         TodoItem item = new TodoItem();
         item.setTodo(name);
-        items.save(item);
+        todoRepo.save(item);
         return "Saved";
     }
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<TodoItem> getTodoItems() {
         // This returns a JSON or XML with the users
-        return items.findAll();
+        return todoRepo.findAll();
     }
-     */
+     
 
     /*
     @RestController
