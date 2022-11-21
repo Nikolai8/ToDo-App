@@ -56,9 +56,43 @@ public class ApiController {
         // This returns a JSON or XML with the users
         return items;
     }
+    /*
+@RestController
+@Controller
+@RequestMapping("/todos")
+public class ApiController {
 
+    // internal list of todo items
+    @Autowired
+    private TodoItem items;
+
+    @PostMapping(path="/add") // Map ONLY POST Requests
+    public @ResponseBody String createAndAddTodoItem (@RequestParam String name) {
+        // @ResponseBody means the returned String is the response, not a view name
+        // @RequestParam means it is a parameter from the GET or POST request
+
+        TodoItem item = new TodoItem();
+        item.setTodo(name);
+        items.save(item);
+        return "Saved";
+    }
+
+    @GetMapping(path="/all")
+    public @ResponseBody Iterable<TodoItem> getTodoItems() {
+        // This returns a JSON or XML with the users
+        return items.findAll();
+    }
+     */
 
     /*
+    @RestController
+    @Controller
+    @RequestMapping("/todos")
+    public class ApiController {
+
+    // internal list of todo items
+    @Autowired
+    private ArrayList<TodoItem> items = new ArrayList<TodoItem>();
     // Add new item to list
     // version 1: using path variables
     @Operation(summary = "Creates a Todo Item with path variable name and default priority of 2")
