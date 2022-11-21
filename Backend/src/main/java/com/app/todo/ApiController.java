@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -29,12 +33,32 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 //Create Read Update Delete
 
 @RestController
+@Controller
 @RequestMapping("/todos")
 public class ApiController {
 
     // internal list of todo items
+    @Autowired
     private ArrayList<TodoItem> items = new ArrayList<TodoItem>();
 
+    @PostMapping(path="/add") // Map ONLY POST Requests
+    public @ResponseBody String createAndAddTodoItem (@RequestParam String name) {
+        // @ResponseBody means the returned String is the response, not a view name
+        // @RequestParam means it is a parameter from the GET or POST request
+
+        TodoItem item = new TodoItem(name);
+        items.add(item);
+        return "Saved";
+    }
+
+    @GetMapping(path="/all")
+    public @ResponseBody List<TodoItem> getTodoItems() {
+        // This returns a JSON or XML with the users
+        return items;
+    }
+
+
+    /*
     // Add new item to list
     // version 1: using path variables
     @Operation(summary = "Creates a Todo Item with path variable name and default priority of 2")
@@ -146,5 +170,6 @@ public class ApiController {
         return todoItem;
         
     }
+    */
     
 }
