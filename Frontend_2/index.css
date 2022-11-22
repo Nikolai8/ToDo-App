@@ -52,7 +52,7 @@ head {
     justify-content: center;
 }
 .ListItemContainer:hover {
-    outline: 4px solid white;
+    outline: 4px solid white !important;
     cursor: pointer;
 }
 

@@ -45,7 +45,7 @@ const ToDo = {
 
         await fetch("http://127.0.0.1:8080/todos/?name="+des, {
             method: "POST",
-            //headers: {'Content-Type': 'application/json'}
+            headers: {'Content-Type': 'application/json'}
         })
         .then(res => {
             console.error(res);
