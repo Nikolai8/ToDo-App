@@ -5,6 +5,7 @@ body, input {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     font-size: calc(10px + 2vmin);
     color: white;
+    background-color: #282c34;
 }
   
 .logo {
@@ -13,17 +14,16 @@ body, input {
 }
 
 main {
-    background-color: #282c34;
-    min-height: 100vh;
+    margin-bottom: 50px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: white;
 }
 
-head {
-    margin: 50px;
+header {
+    margin-top: 50px;
 }
 .ListTitle {
     border-radius: 20px;
@@ -50,10 +50,12 @@ head {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
+    position: relative;
 }
 .ListItemContainer:hover {
     outline: 4px solid white !important;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 #ListAddItemContainer {
@@ -84,4 +86,11 @@ head {
 #ListAddItemMessage {
     font-size: calc(5px + 2vmin);
     display: none;
+}
+
+.checkToDoIcon {
+    cursor: pointer;
+    position: absolute;
+
+    right: 30px;
 }
