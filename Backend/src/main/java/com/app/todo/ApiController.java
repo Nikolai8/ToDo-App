@@ -50,12 +50,12 @@ public class ApiController {
     @Autowired
     private TodoRepositiory todoRepo;
 
-    @Operation(summary = "Creates a Todo Item with path variable name and default priority of 2")
+    /*@Operation(summary = "Creates a Todo Item with path variable name and default priority of 2")
     @ApiResponses(value = 
     {
         @ApiResponse(responseCode = "201", description = "Item has been created" , content = @Content)
     })
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)*/
     @PostMapping(path="/") // Map ONLY POST Requests
     public @ResponseBody String createAndAddTodoItem (@RequestParam String name) {
         // @ResponseBody means the returned String is the response, not a view name
