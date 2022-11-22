@@ -50,6 +50,12 @@ public class ApiController {
     @Autowired
     private TodoRepositiory todoRepo;
 
+    @Operation(summary = "Creates a Todo Item with path variable name and default priority of 2")
+    @ApiResponses(value = 
+    {
+        @ApiResponse(responseCode = "201", description = "Item has been created" , content = @Content)
+    })
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path="/") // Map ONLY POST Requests
     public @ResponseBody String createAndAddTodoItem (@RequestParam String name) {
         // @ResponseBody means the returned String is the response, not a view name
@@ -82,14 +88,14 @@ public class ApiController {
         return todoRepo.findById(id);
         //return todoRepo.findOne(id);
     }
- /*
+ /* 
     @PutMapping(path="/{id}")
-    public @ResponseBody String updateTodoItem (@RequestParam TodoItem item, @PathVariable int newPrio ){
+    public @ResponseBody String updateTodoItem (@RequestBody TodoItem item, @PathVariable int newPrio ){
         item.setPriority(newPrio);
         todoRepo.save(item);
         return "Item updated";
     }
-  */  
+    */
     @PutMapping(path="/")
     public @ResponseBody String updateTodoItem (@RequestBody TodoItem item){
         todoRepo.save(item);
@@ -102,7 +108,13 @@ public class ApiController {
         todoRepo.deleteById(id);
         return "Item deleted";
     }
-    
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(path="/{id}")
+    public @ResponseBody String deleteTodoItemById (@PathVariable String id){
+        todoRepo.deleteById(id);
+        return "Item deleted";
+    }
 
     /*
     @RestController
