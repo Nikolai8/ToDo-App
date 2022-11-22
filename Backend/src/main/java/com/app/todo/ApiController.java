@@ -8,23 +8,7 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.web.bind.annotation.*;
 
 // http://localhost:8080/swagger-ui/index.html
 // http://localhost:8080/v3/api-docs/
@@ -66,7 +50,7 @@ public class ApiController {
     @Autowired
     private TodoRepositiory todoRepo;
 
-    @PostMapping(path="/add") // Map ONLY POST Requests
+    @PostMapping(path="/") // Map ONLY POST Requests
     public @ResponseBody String createAndAddTodoItem (@RequestParam String name) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
@@ -74,15 +58,51 @@ public class ApiController {
         TodoItem item = new TodoItem();
         item.setTodo(name);
         todoRepo.save(item);
-        return "Saved";
+        return "Created and Saved a new item";
     }
-
-    @GetMapping(path="/all")
+/* 
+    @PostMapping(path="/") 
+    public @ResponseBody String createTodoItem (@RequestParam TodoItem item) {
+        todoRepo.save(item);
+        return "Saved a new item";
+    }
+*/
+    @GetMapping(path="/")
     public @ResponseBody Iterable<TodoItem> getTodoItems() {
         // This returns a JSON or XML with the users
+    //    ArrayList<TodoItem> items = new ArrayList<>();
+    //    todoRepo.findAll().forEach(items::add);
+    //    return items;
         return todoRepo.findAll();
     }
-     
+
+    @GetMapping(path="/{id}")
+    public @ResponseBody java.util.Optional<TodoItem> getTodoItemsById(@PathVariable String id) {
+
+        return todoRepo.findById(id);
+        //return todoRepo.findOne(id);
+    }
+ /*
+    @PutMapping(path="/{id}")
+    public @ResponseBody String updateTodoItem (@RequestParam TodoItem item, @PathVariable int newPrio ){
+        item.setPriority(newPrio);
+        todoRepo.save(item);
+        return "Item updated";
+    }
+  */  
+    @PutMapping(path="/")
+    public @ResponseBody String updateTodoItem (@RequestBody TodoItem item){
+        todoRepo.save(item);
+        return "Item updated";
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(path="/")
+    public @ResponseBody String deleteTodoItem (@RequestParam String id){
+        todoRepo.deleteById(id);
+        return "Item deleted";
+    }
+    
 
     /*
     @RestController
@@ -202,7 +222,7 @@ public class ApiController {
 
         items.add(todoItem);
         return todoItem;
-        
+
     }
     */
     
