@@ -74,8 +74,8 @@ head {
 }
 
 .ListAddItemInput {
-    height: 80px;
-    width: 80%;
+    height: 100%;
+    width: 100%;
     background-color: rgba(255, 255, 255, 0);
     outline: none;
     border: none;
