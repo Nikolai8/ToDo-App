@@ -1,9 +1,10 @@
-body {
+body, input {
     text-align: center;
     box-sizing: border-box;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    font-size: 16px;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
   
 .logo {
@@ -18,7 +19,6 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
     color: white;
 }
 
@@ -71,4 +71,12 @@ head {
 }
 #ListAddItemContainer:hover {
     background-color: rgba(255, 255, 255, 0.295);
+}
+
+.ListAddItemInput {
+    height: 80px;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0);
+    outline: none;
+    border: none;
 }
