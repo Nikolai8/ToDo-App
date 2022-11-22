@@ -4,6 +4,7 @@ window.addEventListener("load", () => {
 
 const ToDo = {
     toDoArray: [],
+    addToDoInputActive: false,
 
     init(){
         document.getElementById("ListAddItemContainer").addEventListener("click", () => {
@@ -12,25 +13,31 @@ const ToDo = {
     },
 
     addToDo() {
-        let div = document.createElement("div");
-        div.classList.add("ListItemContainer");
+        if(!this.addToDoInputActive) {
+            let div = document.createElement("div");
+            div.classList.add("ListItemContainer");
 
-        let input = document.createElement("input");
-        input.classList.add("ListAddItemInput");
-        input.onkeydown = (evt) => {
-            if(evt.key == "Enter") {
-                evt.target.blur();
-                div.innerText = input.value;
+            let input = document.createElement("input");
+            input.classList.add("ListAddItemInput");
+            input.onkeydown = (evt) => {
+                if(evt.key == "Enter") {
+                    evt.target.blur();
+                    div.innerText = input.value;
 
-                this.saveToDo();
+                    this.saveToDo();
+                }
             }
-        }
-        div.appendChild(input);
+            div.appendChild(input);
 
-        document.getElementById("ListContainer").appendChild(div);
+            this.addToDoInputActive = true;
+            document.getElementById("ListContainer").appendChild(div);
+        } else {
+            //document.getElementsByClassName("ListAddItemInput")[0].style.border = "1px solid red";
+        }
     },
 
     saveToDo() {
+        this.addToDoInputActive = false;
         alert("fetch post ToDo");
     }
  }
