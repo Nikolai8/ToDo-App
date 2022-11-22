@@ -15,6 +15,7 @@ public class TodoItem implements Serializable {
     
     private int priority = 2;
 
+    
     public TodoItem(){}
     
     public TodoItem(String todo) {
