@@ -1,5 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+
+import ToDoList from './ToDoList.js'
+
+//let todoItemContainer = React.createRef();
 
 function App() {
   return (
@@ -10,24 +15,7 @@ function App() {
           <img src={logo} className="App-logo" alt="logo" />
         </div>
 
-        <div className="App-ListContainer">
-          <p>Meine Aufgaben</p>
-          
-          <div className="App-ListItemContainer">
-            <div className="App-ListItemText">Eintrag 1</div>
-          </div>
-          <div className="App-ListItemContainer">
-            <div className="App-ListItemText">Eintrag 2</div>
-          </div>
-          <div className="App-ListItemContainer">
-            <div className="App-ListItemText">Eintrag 3</div>
-          </div>
-          
-        </div>
-
-        <div className="App-ListAddItemContainer">
-          Hinzufügen
-        </div>
+        <ToDoList />
       </main>
     </div>
   );
