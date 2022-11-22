@@ -28,6 +28,8 @@ const ToDo = {
                     div.classList.remove("ListNewItemContainer");
                     div.style.outline = "none";
 
+                    document.getElementById("ListAddItemMessage").style.display = "none";
+
                     this.saveToDo(des);
                 }
             }
@@ -35,6 +37,7 @@ const ToDo = {
 
             this.addToDoInputActive = true;
             document.getElementById("ListContainer").appendChild(div);
+            document.getElementById("ListAddItemMessage").style.display = "block";
         } else {
             document.getElementsByClassName("ListNewItemContainer")[0].style.outline = "4px solid red";
         }
