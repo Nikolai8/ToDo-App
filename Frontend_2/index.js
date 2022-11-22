@@ -43,7 +43,7 @@ const ToDo = {
     async saveToDo(des) {
         this.addToDoInputActive = false;
 
-        await fetch("127.0.0.1:8080/todos/?name="+des, {
+        await fetch("http://127.0.0.1:8080/todos/?name="+des, {
             method: "POST",
             //headers: {'Content-Type': 'application/json'}
         })
