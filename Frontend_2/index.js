@@ -15,16 +15,20 @@ const ToDo = {
     addToDo() {
         if(!this.addToDoInputActive) {
             let div = document.createElement("div");
-            div.classList.add("ListItemContainer");
+            div.classList.add("ListItemContainer", "ListNewItemContainer");
 
             let input = document.createElement("input");
             input.classList.add("ListAddItemInput");
             input.onkeydown = (evt) => {
                 if(evt.key == "Enter") {
-                    evt.target.blur();
-                    div.innerText = input.value;
+                    let des = input.value;
 
-                    this.saveToDo();
+                    evt.target.blur();
+                    div.innerText = des;
+                    div.classList.remove("ListNewItemContainer");
+                    div.style.outline = "none";
+
+                    this.saveToDo(des);
                 }
             }
             div.appendChild(input);
@@ -32,12 +36,19 @@ const ToDo = {
             this.addToDoInputActive = true;
             document.getElementById("ListContainer").appendChild(div);
         } else {
-            //document.getElementsByClassName("ListAddItemInput")[0].style.border = "1px solid red";
+            document.getElementsByClassName("ListNewItemContainer")[0].style.outline = "4px solid red";
         }
     },
 
-    saveToDo() {
+    async saveToDo(des) {
         this.addToDoInputActive = false;
-        alert("fetch post ToDo");
+
+        await fetch("localhost:8080/todos/?name="+des, {
+            method: "POST",
+            //headers: {'Content-Type': 'application/json'}
+        })
+        .then(res => {
+            console.error(res);
+        });
     }
  }
