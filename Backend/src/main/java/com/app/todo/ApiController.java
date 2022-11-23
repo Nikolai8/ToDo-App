@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
+//import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +44,7 @@ public class ApiController {
     
 @RestController
 @Controller
-@CrossOrigin
+@CrossOrigin(origins = "http://127.0.0.1:5500", maxAge = 3600)
 @RequestMapping("/todos")
 public class ApiController {
 
@@ -58,7 +58,7 @@ public class ApiController {
         @ApiResponse(responseCode = "201", description = "Item has been created" , content = @Content)
     })
     @ResponseStatus(HttpStatus.CREATED)*/
-    @CrossOrigin(origins = "http://localhost:*")
+    //@CrossOrigin(origins = "http://localhost:*")
     @PostMapping(path="/") // Map ONLY POST Requests
     public @ResponseBody String createAndAddTodoItem (@RequestParam String name) {
         // @ResponseBody means the returned String is the response, not a view name
@@ -86,9 +86,9 @@ public class ApiController {
     }
 
     @GetMapping(path="/{id}")
-    public @ResponseBody java.util.Optional<TodoItem> getTodoItemsById(@PathVariable String id) {
+    public @ResponseBody java.util.Optional<TodoItem> getTodoItemsById(@PathVariable String name) {
 
-        return todoRepo.findById(id);
+        return todoRepo.findById(name);
         //return todoRepo.findOne(id);
     }
  /* 
@@ -107,15 +107,15 @@ public class ApiController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(path="/")
-    public @ResponseBody String deleteTodoItem (@RequestParam String id){
-        todoRepo.deleteById(id);
+    public @ResponseBody String deleteTodoItem (@RequestParam String name){
+        todoRepo.deleteById(name); //name = id
         return "Item deleted";
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(path="/{id}")
-    public @ResponseBody String deleteTodoItemById (@PathVariable String id){
-        todoRepo.deleteById(id);
+    public @ResponseBody String deleteTodoItemById (@PathVariable String name){
+        todoRepo.deleteById(name);
         return "Item deleted";
     }
 
