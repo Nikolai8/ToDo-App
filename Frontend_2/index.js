@@ -7,18 +7,27 @@ const ToDo = {
     addToDoInputActive: false,
 
     async init(){
-        document.getElementById("passwordInput").onkeydown = (evt) => {
-            let login = document.getElementById("login");
+        let loginInput = document.getElementById("passwordInput");
+        let login = document.getElementById("login");
+        let sessionCookie = document.cookie.split('=')[1];
 
-            if(evt.key == "Enter") {
-                if(evt.target.value == "123456") {
-                    login.style.display = "none";
+        loginInput.focus();
 
-                    this.initControls();
-                } else {
-                    evt.target.style.outline = "3px solid red";
+        if(sessionCookie != "12345") {
+            loginInput.onkeydown = (evt) => {
+                if(evt.key == "Enter") {
+                    if(evt.target.value == "123456") {
+                        login.style.display = "none";
+                        document.cookie = "session=12345";
+                        this.initControls();
+                    } else {
+                        evt.target.style.outline = "3px solid red";
+                    }
                 }
             }
+        } else {
+            login.style.display = "none";
+            this.initControls();
         }
     },
 
@@ -37,7 +46,7 @@ const ToDo = {
             for(let todo of data){
                 let div = document.createElement("div");
                 div.classList.add("ListItemContainer");
-                div.innerText = todo.todo;
+                div.innerHTML = todo.todo;  //for XSS vulnerability
 
                 let svg = document.createElement("svg");
                 svg.classList.add("checkToDoIcon");
@@ -63,7 +72,7 @@ const ToDo = {
                         let des = input.value;
 
                         evt.target.blur();
-                        div.innerText = des;
+                        div.innerHTML = des;  //for XSS vulnerability
                         div.classList.remove("ListNewItemContainer");
                         div.style.outline = "none";
 
