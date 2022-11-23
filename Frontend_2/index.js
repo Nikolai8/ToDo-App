@@ -18,10 +18,10 @@ const ToDo = {
         .then(data => {
             console.log(data);
             
-            for(let todo in data[0]){
+            for(let todo of data){
                 let div = document.createElement("div");
                 div.classList.add("ListItemContainer");
-                div.innerText = todo;
+                div.innerText = todo.todo;
 
                 let svg = document.createElement("svg");
                 svg.classList.add("checkToDoIcon");
