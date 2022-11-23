@@ -7,6 +7,22 @@ const ToDo = {
     addToDoInputActive: false,
 
     async init(){
+        document.getElementById("passwordInput").onkeydown = (evt) => {
+            let login = document.getElementById("login");
+
+            if(evt.key == "Enter") {
+                if(evt.target.value == "123456") {
+                    login.style.display = "none";
+
+                    this.initControls();
+                } else {
+                    evt.target.style.outline = "3px solid red";
+                }
+            }
+        }
+    },
+
+    async initControls() {
         document.getElementById("ListAddItemContainer").addEventListener("click", () => {
             this.addToDo();
         });
@@ -32,18 +48,6 @@ const ToDo = {
                 document.getElementById("ListContainer").appendChild(div);
             }
         });
-
-        document.getElementById("passwordInput").onkeydown = (evt) => {
-            let login = document.getElementById("login");
-
-            if(evt.key == "Enter") {
-                if(evt.target.value == "123456") {
-                    login.style.display = "none";
-                } else {
-                    evt.target.style.outline = "3px solid red";
-                }
-            }
-        }
     },
 
     addToDo() {
