@@ -5,6 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
 // http://localhost:8080/swagger-ui/index.html
 // http://localhost:8080/v3/api-docs/
 
@@ -79,7 +83,7 @@ public class ApiController {
         return todoRepo.findAll();
     }
 
-    @GetMapping(path="/{id}")
+    @GetMapping(path="/{name}")
     public @ResponseBody java.util.Optional<TodoItem> getTodoItemsById(@PathVariable String name) {
 
         return todoRepo.findById(name);
@@ -107,9 +111,40 @@ public class ApiController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping(path="/{id}")
+    @DeleteMapping(path="/{name}")
     public @ResponseBody String deleteTodoItemById (@PathVariable String name){
         todoRepo.deleteById(name);
+        return "Item deleted";
+    }
+ 
+    //@ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping(path="/del/")
+    public @ResponseBody String deleteTodoItemByName (@RequestParam String name){
+        try{
+            // create the mysql database connection
+            String myDriver = "com.mysql.cj.jdbc.Driver";
+            String myUrl = "jdbc:mysql://localhost:3307/todo";
+            Class.forName(myDriver);
+            Connection conn = DriverManager.getConnection(myUrl, "root", "todouser");
+
+            // create the mysql delete statement.
+            // i'm deleting the row where the id is "3", which corresponds to my
+            // "Barney Rubble" record.
+            //String query = "DELETE FROM todo.todo_item WHERE todo = \"?\"";
+            String query = "DELETE FROM todo.todo_item WHERE todo = " + "\"" + name + "\"";
+            PreparedStatement preparedStmt = conn.prepareStatement(query);
+            //preparedStmt.setString(1, name);
+            System.out.println("query: " + query);
+            // execute the preparedstatement
+            preparedStmt.execute();
+
+            conn.close();
+        }catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }        
+        
+        //todoRepo.deleteById(name);
         return "Item deleted";
     }
 
