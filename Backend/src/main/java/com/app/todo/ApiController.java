@@ -44,7 +44,7 @@ public class ApiController {
     
 @RestController
 @Controller
-//@CrossOrigin
+@CrossOrigin
 @RequestMapping("/todos")
 public class ApiController {
 
@@ -58,7 +58,7 @@ public class ApiController {
         @ApiResponse(responseCode = "201", description = "Item has been created" , content = @Content)
     })
     @ResponseStatus(HttpStatus.CREATED)*/
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "http://localhost:*")
     @PostMapping(path="/") // Map ONLY POST Requests
     public @ResponseBody String createAndAddTodoItem (@RequestParam String name) {
         // @ResponseBody means the returned String is the response, not a view name
