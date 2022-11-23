@@ -103,13 +103,14 @@ public class ApiController {
         return "Item updated";
     }
 
+   /*
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(path="/")
     public @ResponseBody String deleteTodoItem (@RequestParam String name){
         todoRepo.deleteById(name); //name = id
         return "Item deleted";
     }
-
+*/
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(path="/{name}")
     public @ResponseBody String deleteTodoItemById (@PathVariable String name){
@@ -118,7 +119,7 @@ public class ApiController {
     }
  
     //@ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping(path="/del/")
+    @DeleteMapping(path="/")
     public @ResponseBody String deleteTodoItemByName (@RequestParam String name){
         try{
             // create the mysql database connection
@@ -134,7 +135,7 @@ public class ApiController {
             String query = "DELETE FROM todo.todo_item WHERE todo = " + "\"" + name + "\"";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             //preparedStmt.setString(1, name);
-            System.out.println("query: " + query);
+            
             // execute the preparedstatement
             preparedStmt.execute();
 
