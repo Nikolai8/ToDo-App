@@ -6,9 +6,20 @@ const ToDo = {
     toDoArray: [],
     addToDoInputActive: false,
 
-    init(){
+    async init(){
         document.getElementById("ListAddItemContainer").addEventListener("click", () => {
             this.addToDo();
+        });
+
+        await fetch("http://127.0.0.1:8080/todos")
+        .then(res => {
+            console.error(res);
+
+            /*for(let todo in res) {
+                let div = document.createElement("div");
+                div.classList.add("ListItemContainer");
+                document.getElementById("ListContainer").appendChild(div);
+            }*/
         });
     },
 
@@ -21,24 +32,26 @@ const ToDo = {
             input.classList.add("ListAddItemInput");
             input.onkeydown = (evt) => {
                 if(evt.key == "Enter") {
-                    let des = input.value;
+                    if(input.value != "") {
+                        let des = input.value;
 
-                    evt.target.blur();
-                    div.innerText = des;
-                    div.classList.remove("ListNewItemContainer");
-                    div.style.outline = "none";
+                        evt.target.blur();
+                        div.innerText = des;
+                        div.classList.remove("ListNewItemContainer");
+                        div.style.outline = "none";
 
-                    document.getElementById("ListAddItemMessage").style.display = "none";
+                        document.getElementById("ListAddItemMessage").style.display = "none";
 
-                    let svg = document.createElement("svg");
-                    svg.classList.add("checkToDoIcon");
-                    svg.innerHTML = '<svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" > <path d="M10.5858 13.4142L7.75735 10.5858L6.34314 12L10.5858 16.2427L17.6568 9.1716L16.2426 7.75739L10.5858 13.4142Z" fill="#06c258" /> </svg>'
+                        let svg = document.createElement("svg");
+                        svg.classList.add("checkToDoIcon");
+                        svg.innerHTML = '<svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" > <path d="M10.5858 13.4142L7.75735 10.5858L6.34314 12L10.5858 16.2427L17.6568 9.1716L16.2426 7.75739L10.5858 13.4142Z" fill="#06c258" /> </svg>'
 
-                    svg.addEventListener("click", () => this.deleteToDo(des, svg.parentElement));
+                        svg.addEventListener("click", () => this.deleteToDo(des, svg.parentElement));
 
-                    div.appendChild(svg);
+                        div.appendChild(svg);
 
-                    this.saveToDo(des);
+                        this.saveToDo(des);
+                    }
                 }
             }
             div.appendChild(input);
