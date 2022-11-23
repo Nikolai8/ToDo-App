@@ -16,6 +16,8 @@ const ToDo = {
             return res.json();
         })
         .then(data => {
+            console.log(data);
+            
             for(let todo in data[0]){
                 let div = document.createElement("div");
                 div.classList.add("ListItemContainer");
