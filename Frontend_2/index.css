@@ -88,6 +88,7 @@ header {
 #ListAddItemMessage {
     font-size: calc(5px + 2vmin);
     display: none;
+    margin-bottom: 50px;
 }
 
 .checkToDoIcon {
@@ -140,5 +141,4 @@ header {
 
 #labNames {
     font-size: calc(3px + 2vmin);
-    margin-bottom: 20px;
 }
