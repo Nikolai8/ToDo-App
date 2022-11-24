@@ -30,7 +30,7 @@ const ToDo = {
 
         loginInput.onkeydown = (evt) => {
             if(evt.key == "Enter") {
-                if(evt.target.value == "123456") {
+                if(evt.target.value == "123456") {  //for Authentication vulnerability
                     login.style.display = "none";
                     document.cookie = "session=12345";
 
