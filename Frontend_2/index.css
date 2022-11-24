@@ -137,3 +137,8 @@ header {
 #logoutButton:hover {
     background-color: rgba(255, 255, 255, 0.295);
 }
+
+#labNames {
+    font-size: calc(3px + 2vmin);
+    margin-bottom: 20px;
+}
