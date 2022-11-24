@@ -5,35 +5,53 @@ window.addEventListener("load", () => {
 const ToDo = {
     toDoArray: [],
     addToDoInputActive: false,
+    loggedIn: null,
 
     async init(){
         let loginInput = document.getElementById("passwordInput");
         let login = document.getElementById("login");
         let sessionCookie = document.cookie.split('=')[1];
+        let logoutButton = document.getElementById("logoutButton");
 
-        loginInput.focus();
+        logoutButton.addEventListener("click", (evt) => {
+            login.style.display = "flex";
+            loginInput.value = "";
+            loginInput.focus();
+            evt.target.style.visibility = "hidden";
+            this.loggedIn = false;
 
-        if(sessionCookie != "12345") {
-            loginInput.onkeydown = (evt) => {
-                if(evt.key == "Enter") {
-                    if(evt.target.value == "123456") {
-                        login.style.display = "none";
-                        document.cookie = "session=12345";
-                        this.initControls();
-                    } else {
-                        evt.target.style.outline = "3px solid red";
-                    }
+            document.cookie = "session=";
+        });
+
+        loginInput.onkeydown = (evt) => {
+            if(evt.key == "Enter") {
+                if(evt.target.value == "123456") {
+                    login.style.display = "none";
+                    document.cookie = "session=12345";
+
+                    logoutButton.style.visibility = "visible";
+                    this.loggedIn = true;
+                    this.initControls();
+                } else {
+                    evt.target.style.outline = "3px solid red";
                 }
             }
+        }
+
+        if(sessionCookie != "12345") {
+            loginInput.focus();
+            this.loggedIn = false;
         } else {
             login.style.display = "none";
+            logoutButton.style.visibility = "visible";
             this.initControls();
+            this.loggedIn = true;
         }
     },
 
     async initControls() {
         document.getElementById("ListAddItemContainer").addEventListener("click", () => {
-            this.addToDo();
+            if(this.loggedIn == true) this.addToDo();
         });
 
         await fetch("http://127.0.0.1:8080/todos/")

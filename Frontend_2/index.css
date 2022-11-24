@@ -40,7 +40,7 @@ header {
 #ListContainer {
     background-color: rgba(255, 255, 255, 0.116);
     border-radius: 20px;
-    width: 70vw;
+    width: 60vw;
 }
 
 .ListItemContainer {
@@ -62,7 +62,7 @@ header {
 
 #ListAddItemContainer {
     margin: 50px auto;
-    width: 30vw;
+    width: 25vw;
     height: 100px;
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.116);
@@ -113,4 +113,27 @@ header {
 }
 #login div {
     margin: 20px;
+}
+#logoutButton {
+    background-color: rgba(255, 255, 255, 0.116);
+    border-radius: 10px;
+    width: 10vw;
+    height: 6vh;
+    font-size: calc(5px + 2vmin);
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin: 50px;
+
+    cursor: pointer;
+    visibility: hidden;
+}
+#logoutButton:hover {
+    background-color: rgba(255, 255, 255, 0.295);
 }
