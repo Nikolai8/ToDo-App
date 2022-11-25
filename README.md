@@ -3,15 +3,17 @@
 
 
 ## Spring Boot Backend
-
-### How to start
+### How to start the application
+- Start MySQL DB:
 1. open docker (desktop)
-2. open a terminal in the backend
+2. open a terminal and go into the backend folder
+3. execute ,,docker compose up” 
 
-    - enter -> docker compose up
-3. open a second terminal in the backend
-
-    - enter -> mvn spring-boot:run
+- Start the Server:
+1. open the project in Maven
+2. start the server with ,,mvn spring-boot:run”
+3. go to http://localhost:8080/
+4. use the password “123456” to sign in or find it in the js
 
 You can now use the SWAGGER UI to CRUD Todo Items into the DB
 		
