@@ -6,12 +6,21 @@ const ToDo = {
     toDoArray: [],
     addToDoInputActive: false,
     loggedIn: null,
+    sessionCookie: null,
 
     async init(){
         let loginInput = document.getElementById("passwordInput");
         let login = document.getElementById("login");
-        let sessionCookie = document.cookie.split('=')[1];
+        let cookieString = document.cookie.replace(/\s/g, '');
         let logoutButton = document.getElementById("logoutButton");
+
+        for(let cookie of cookieString.split(';')) {
+            let cookieSplit = cookie.split("=");
+            
+            if(cookieSplit[0] == "session") {
+                this.sessionCookie = cookieSplit[1];
+            }
+        }
 
         logoutButton.addEventListener("click", (evt) => {
             login.style.display = "flex";
@@ -43,7 +52,7 @@ const ToDo = {
             }
         }
 
-        if(sessionCookie != "12345") {
+        if(this.sessionCookie != "12345") {
             loginInput.focus();
             this.loggedIn = false;
         } else {
