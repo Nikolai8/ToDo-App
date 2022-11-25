@@ -126,9 +126,9 @@ public class ApiController {
             Connection conn = DriverManager.getConnection(myUrl, "root", "todouser");
 
             // create the mysql delete statement.
-            //String query = "DELETE FROM todo.todo_item WHERE todo = \"?\"";
-            String query = "DELETE FROM todo.todo_item WHERE todo IN (\"" + name + "\");";
-            System.out.println(query);
+            //String query = "DELETE FROM todo.todo_item WHERE todo = \"?\""; doesn't work tested by
+            String query = "DELETE FROM todo.todo_item WHERE todo IN (\"" + name + "\");";  // Marc
+            System.out.println(query);                                              // and Nikolai
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             //preparedStmt.setString(1, name);
             
