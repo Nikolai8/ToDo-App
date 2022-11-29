@@ -1,8 +1,5 @@
 # ToDo-App description
-## React Frontend
 
-
-## Spring Boot Backend
 ### How to start the application
 - Start MySQL DB:
 1. open docker (desktop)
